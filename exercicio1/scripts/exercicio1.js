@@ -5,7 +5,7 @@ var inputWord = document.querySelector("#word");
 countVowels("JOGADOR");
 function countVowels(verifyWord) {
     var VOGAIS = ["A", "E", "I", "O", "U"];
-    var word = verifyWord.toUpperCase();
+    var word = verifyWord.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     var count = 0;
     for (var i = 0; i < word.length; i++) {
         if (VOGAIS.includes(word[i])) {
@@ -18,6 +18,6 @@ function countVowels(verifyWord) {
 }
 submitWord.addEventListener('click', function (event) {
     event.preventDefault();
-    var word = inputWord.value;
+    var word = inputWord.value.toUpperCase();
     countVowels(word);
 });
