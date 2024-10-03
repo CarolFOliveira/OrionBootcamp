@@ -8,6 +8,11 @@
     "build": "tsc",
     "start": "lite-server"
   },
+  
+    "server": {
+      "baseDir": "./src"
+    }
+  ,
   "keywords": [],
   "type": "module",
   "author": "",

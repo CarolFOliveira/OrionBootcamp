@@ -24,7 +24,9 @@ jobs:
     - name: Build project
       run: npm run build
 
-    
+    - name: Start project
+      run: npm start
+
     - name: Deploy to Server
       run: |
         rsync -avz dist/ user@server:/var/www/html  # Exemplo de deploy para um servidor via rsync
