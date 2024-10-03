@@ -27,8 +27,7 @@ jobs:
     - name: Start project
       run: npm start
 
-    - name: Deploy to Server
-      name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
