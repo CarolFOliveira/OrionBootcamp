@@ -1,0 +1,34 @@
+name: Build and Deploy Exercício 3
+
+on:
+  push:
+    branches:
+      - feature/exercicio3  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'  
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Start project
+      run: npm start
+
+    - name: Deploy to Server
+      run: |
+        rsync -avz dist/ user@server:/var/www/html  # Exemplo de deploy para um servidor via rsync
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
