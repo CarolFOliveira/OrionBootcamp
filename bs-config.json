@@ -1,8 +1,6 @@
 {
-    "server": {
-      "baseDir": "./dist"
-    },
-    "open": false
+    "port": 8000,
+    
+    "server": { "baseDir": "./dist" }
   }
-  
  
