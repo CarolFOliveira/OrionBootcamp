@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+    outline: none;
+}
+body{
+    background-color: #edecec;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    background-color: #cecece8d;
+    height: 30rem;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid #ffffff;
+    border-radius: 2rem;
+}
+.container .example{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.2rem;
+    word-spacing: 0.2rem;
+}
+.container .example h3{
+    padding-right: 0.5rem;
+}
+.container .example p, b {
+    color: #ff0000;
+    font-weight: bold;
+    
+}
+.container #form{
+    background-color: #a6a6a641;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+.container #form button, #word{
+    background-color: #ffffff;
+    padding: 0.3rem;
+    border: 2px solid #656565;
+    height: 2rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.container #form label{
+    font-size: 1.2rem;
+}
+.container #form #word{
+    text-transform: uppercase;
+}
