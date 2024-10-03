@@ -27,6 +27,7 @@ submitWord.addEventListener('click',(event)=>{
     event.preventDefault();
     const word: string = inputWord.value.toUpperCase();
     countVowels(word);
+    inputWord.value = "";
     
 })
 

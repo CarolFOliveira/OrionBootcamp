@@ -1,23 +1,22 @@
+const btn_exercicio1 = document.getElementById("exercicio1"); 
+const btn_exercicio2 = document.getElementById("exercicio2");
+const btn_historico = document.getElementById("commits");
 
-const btn_exercicio1 = document.querySelector("#exercicio1") as HTMLButtonElement;
-const btn_exercicio2 = document.querySelector("#exercicio2") as HTMLButtonElement;
-const btn_historico = document.querySelector("#commits") as HTMLButtonElement;
-
-// const div_btn = document.createElement("div") as HTMLDivElement
-// const btn_exercicio1 = document.createElement("button#exercicio1") as HTMLButtonElement;
-// const btn_exercicio2 = document.createElement("button#exercicio2") as HTMLButtonElement;
-// const btn_historico = document.createElement("button#commits") as HTMLButtonElement;
-
-// div_btn.appendChild(btn_exercicio1)
-
-btn_exercicio1.addEventListener('click',()=>{
-  window.location.href = 'src/exercicio1/index.html'
+   if(btn_exercicio1){
+    btn_exercicio1.addEventListener('click',()=>{
+      window.location.href = 'src/exercicio1/index.html'
+    })
+   } 
+   if(btn_exercicio2){
+      btn_exercicio2.addEventListener('click',()=>{
+      window.location.href = 'src/exercicio2/index.html'
+    })
+   }
+   if(btn_historico){
+      btn_historico.addEventListener('click',()=>{
+      window.location.href = 'https://github.com/CarolFOliveira/OrionBootcamp/activity?sort=ASC'
 })
+   }
 
-btn_exercicio2.addEventListener('click',()=>{
-  window.location.href = 'src/exercicio2/index.html'
-})
 
-btn_historico.addEventListener('click',()=>{
-  window.location.href = 'https://github.com/CarolFOliveira/OrionBootcamp/activity?sort=ASC'
-})
+

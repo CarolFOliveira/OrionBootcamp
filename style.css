@@ -7,7 +7,7 @@ body{
     margin: 4rem;
     width: 70vw;
     height: 80vh;
-    background-image: url('./imgs/Orion_Bootcamp.png');
+    background-image: url('src/imgs/Orion_Bootcamp.png');
     background-size: cover;
     border: 4px solid #e5b7aaa7;
     border-radius: 3rem;

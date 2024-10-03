@@ -1,25 +1,25 @@
 "use strict";
-const showWord = document.querySelector("#showWord");
-const vowels = document.querySelector("#vowels");
-const submitWord = document.querySelector("#submitWord");
-const inputWord = document.querySelector("#word");
+var showWord = document.querySelector("#showWord");
+var vowels = document.querySelector("#vowels");
+var submitWord = document.querySelector("#submitWord");
+var inputWord = document.querySelector("#word");
 countVowels("JOGADOR");
 function countVowels(verifyWord) {
-    const VOGAIS = ["A", "E", "I", "O", "U"];
-    let word = verifyWord.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-    let count = 0;
-    for (let i = 0; i < word.length; i++) {
+    var VOGAIS = ["A", "E", "I", "O", "U"];
+    var word = verifyWord.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+    var count = 0;
+    for (var i = 0; i < word.length; i++) {
         if (VOGAIS.includes(word[i])) {
             count++;
         }
     }
     showWord.textContent = verifyWord;
-    vowels.textContent = `${count} vogal(is)`;
+    vowels.textContent = "".concat(count, " vogal(is)");
     return count;
 }
-submitWord.addEventListener('click', (event) => {
+submitWord.addEventListener('click', function (event) {
     event.preventDefault();
-    const word = inputWord.value.toUpperCase();
+    var word = inputWord.value.toUpperCase();
     countVowels(word);
+    inputWord.value = "";
 });
-//# sourceMappingURL=exercicio1.js.map

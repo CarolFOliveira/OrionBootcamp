@@ -81,15 +81,16 @@ btn_remove.addEventListener('click', (event)=>{
 })
 btn_modify.addEventListener('click', (event)=>{
     event.preventDefault();
+    p.textContent ="";
     const id:string = input_search.value;
-    const searchId: number = parseInt(id)
+    const searchId: number = parseInt(id);
     input_name.placeholder = "Insira o novo nome";
-    input_name.id = "input_name"
+    input_name.id = "input_name";
     result_search.appendChild(input_name);
-    btn_name.id = "btn_name"
-    btn_name.textContent = "Atualizar"
+    btn_name.id = "btn_name";
+    btn_name.textContent = "Atualizar";
     result_search.appendChild(btn_name);
-    update_name(searchId)
+    update_name(searchId);
     
     
 })

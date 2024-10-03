@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
-    
-    "target": "es2016",                                 
-    "module": "commonjs",                                
-    "esModuleInterop": true,                    
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",         
-    "strict": true,                  
-    "skipLibCheck": true, 
-    
-    "sourceMap": true, 
-    "rootDir": "src/",
-    "outDir": "dist/", 
-                                
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true, // Ignora a verificação de tipagem em arquivos de declaração (opcional)
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "exclude": [
+    "node_modules/@types/react-native",
+    "node_modules/react-native"
+  ],
+
+  "include": [
+    "src"  /* Inclui todos os arquivos TypeScript na pasta src. */
+  ]
 }
 
 
