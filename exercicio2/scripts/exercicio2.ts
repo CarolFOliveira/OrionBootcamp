@@ -1,4 +1,11 @@
-let lista: Array<{id:number,name:string,bio:string}> = [
+
+interface Pessoa{
+    id: number;
+    name:string;
+    bio:string;
+}
+
+let lista: Array<Pessoa> = [
     {   
         id : 1,
         name: "Ada Lovelace", 
@@ -21,8 +28,8 @@ let lista: Array<{id:number,name:string,bio:string}> = [
     }
     ];
 
-const list = document.querySelector("#list") as HTMLUListElement
 
+const list = document.querySelector("#list") as HTMLUListElement
 const input_search = document.querySelector("#input_search") as HTMLInputElement;
 const input_name = document.createElement("input") as HTMLInputElement;
 const btn_showList = document.querySelector("#btn_showList") as HTMLButtonElement;

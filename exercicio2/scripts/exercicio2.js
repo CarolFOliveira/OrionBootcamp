@@ -1,4 +1,5 @@
-var lista = [
+"use strict";
+let lista = [
     {
         id: 1,
         name: "Ada Lovelace",
@@ -20,57 +21,57 @@ var lista = [
         bio: "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."
     }
 ];
-var list = document.querySelector("#list");
-var input_search = document.querySelector("#input_search");
-var input_name = document.createElement("input");
-var btn_showList = document.querySelector("#btn_showList");
-var btn_searchBio = document.querySelector("#btn_searchBio");
-var btn_searchName = document.querySelector("#btn_searchName");
-var btn_name = document.createElement("button");
-var btn_remove = document.querySelector("#btn_remove");
-var btn_modify = document.querySelector("#btn_modify");
-var result_search = document.querySelector(".result_search");
-var p = document.createElement("p");
+const list = document.querySelector("#list");
+const input_search = document.querySelector("#input_search");
+const input_name = document.createElement("input");
+const btn_showList = document.querySelector("#btn_showList");
+const btn_searchBio = document.querySelector("#btn_searchBio");
+const btn_searchName = document.querySelector("#btn_searchName");
+const btn_name = document.createElement("button");
+const btn_remove = document.querySelector("#btn_remove");
+const btn_modify = document.querySelector("#btn_modify");
+const result_search = document.querySelector(".result_search");
+const p = document.createElement("p");
 function showList() {
     list.innerHTML = '';
-    lista.forEach(function (item) {
-        var item_list = document.createElement("li");
-        var text_list = document.createTextNode("Id: ".concat(item.id, " - ").concat(item.name, " => ").concat(item.bio));
+    lista.forEach((item) => {
+        const item_list = document.createElement("li");
+        let text_list = document.createTextNode(`Id: ${item.id} - ${item.name} => ${item.bio}`);
         item_list.appendChild(text_list);
         item_list.classList.add("list-group-item");
         list.appendChild(item_list);
     });
 }
 showList();
-btn_searchBio.addEventListener('click', function (event) {
+btn_searchBio.addEventListener('click', (event) => {
     event.preventDefault();
-    var id = input_search.value;
-    var searchId = parseInt(id);
-    var result_bio = showBio_funcional(searchId, lista);
+    const id = input_search.value;
+    const searchId = parseInt(id);
+    const result_bio = showBio_funcional(searchId, lista);
     p.textContent = result_bio;
     result_search.appendChild(p);
 });
-btn_searchName.addEventListener('click', function (event) {
+btn_searchName.addEventListener('click', (event) => {
     event.preventDefault();
-    var id = input_search.value;
-    var searchId = parseInt(id);
-    var result_name = showName_funcional(searchId, lista);
+    const id = input_search.value;
+    const searchId = parseInt(id);
+    const result_name = showName_funcional(searchId, lista);
     p.textContent = result_name;
     result_search.appendChild(p);
 });
-btn_remove.addEventListener('click', function (event) {
+btn_remove.addEventListener('click', (event) => {
     event.preventDefault();
-    var id = input_search.value;
-    var searchId = parseInt(id);
-    var result_name = removeItem_funcional(searchId, lista);
+    const id = input_search.value;
+    const searchId = parseInt(id);
+    const result_name = removeItem_funcional(searchId, lista);
     p.textContent = result_name;
     result_search.appendChild(p);
     showList();
 });
-btn_modify.addEventListener('click', function (event) {
+btn_modify.addEventListener('click', (event) => {
     event.preventDefault();
-    var id = input_search.value;
-    var searchId = parseInt(id);
+    const id = input_search.value;
+    const searchId = parseInt(id);
     input_name.placeholder = "Insira o novo nome";
     input_name.id = "input_name";
     result_search.appendChild(input_name);
@@ -80,10 +81,10 @@ btn_modify.addEventListener('click', function (event) {
     update_name(searchId);
 });
 function update_name(searchId) {
-    btn_name.addEventListener('click', function (event) {
+    btn_name.addEventListener('click', (event) => {
         event.preventDefault();
-        var newname = input_name.value;
-        var result_name = modify_funcional(searchId, newname, lista);
+        const newname = input_name.value;
+        const result_name = modify_funcional(searchId, newname, lista);
         p.textContent = result_name;
         result_search.appendChild(p);
         showList();
@@ -91,8 +92,8 @@ function update_name(searchId) {
 }
 // a) Crie uma função que retorne a bio do id passado
 function showBio_imperativo(id) {
-    var answer = "";
-    for (var i = 0; i < lista.length; i++) {
+    let answer = "";
+    for (let i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
             console.log("Bio do id passado: ");
             answer = lista[i].bio;
@@ -105,14 +106,14 @@ function showBio_imperativo(id) {
     return answer;
 }
 console.log(showBio_imperativo(3));
-var showBio_funcional = function (id, lista) {
-    var item = lista.find(function (item) { return item.id === id; });
+const showBio_funcional = (id, lista) => {
+    const item = lista.find(item => item.id === id);
     return item ? item.bio : "Id não encontrado";
 };
 // b) Crie uma função que retorne o name do id passado
 function showName_imperativo(id) {
-    var answer = "";
-    for (var i = 0; i < lista.length; i++) {
+    let answer = "";
+    for (let i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
             console.log("Name do id passado: ");
             answer = lista[i].name;
@@ -125,16 +126,16 @@ function showName_imperativo(id) {
     return answer;
 }
 console.log(showName_imperativo(3));
-var showName_funcional = function (id, lista) {
-    var item = lista.find(function (item) { return item.id === id; });
+const showName_funcional = (id, lista) => {
+    const item = lista.find(item => item.id === id);
     return item ? item.name : "Id não encontrado";
 };
 // c) Crie uma função que apague um item da lista a partir de um id passado
 function removeItem_imperativo(id) {
-    var answer = "";
-    for (var i = 0; i < lista.length; i++) {
+    let answer = "";
+    for (let i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
-            answer = "Item removido: \n id: ".concat(id, " \n name: ").concat(lista[i].name, " \n bio: ").concat(lista[i].bio);
+            answer = `Item removido: \n id: ${id} \n name: ${lista[i].name} \n bio: ${lista[i].bio}`;
             lista.splice(i, 1);
             console.log(lista);
             break;
@@ -146,17 +147,17 @@ function removeItem_imperativo(id) {
     return answer;
 }
 console.log(removeItem_imperativo(6));
-var removeItem_funcional = function (id, lista) {
-    var item = lista.find(function (item) { return item.id === id; });
-    var index = lista.indexOf(item);
+const removeItem_funcional = (id, lista) => {
+    const item = lista.find(item => item.id === id);
+    const index = lista.indexOf(item);
     lista.splice(index, 1);
     console.log(lista);
     return item ? "Item removido" : "Id não encontrado";
 };
 // d) Crie uma função que altere a bio ou o name a partir de um id passado
 function modify_imperativo(id, name) {
-    var answer = "";
-    for (var i = 0; i < lista.length; i++) {
+    let answer = "";
+    for (let i = 0; i < lista.length; i++) {
         if (lista[i].id === id) {
             lista[i].name = name;
             console.log(lista[i]);
@@ -170,9 +171,9 @@ function modify_imperativo(id, name) {
     return answer;
 }
 console.log(modify_imperativo(4, "Elon Musk"));
-var modify_funcional = function (id, nome, lista) {
-    var item = lista.find(function (item) { return item.id === id; });
-    var index = lista.indexOf(item);
+const modify_funcional = (id, nome, lista) => {
+    const item = lista.find(item => item.id === id);
+    const index = lista.indexOf(item);
     lista[index].name = nome;
     console.log(item);
     return item ? "Nome alterado" : "Id não encontrado";
