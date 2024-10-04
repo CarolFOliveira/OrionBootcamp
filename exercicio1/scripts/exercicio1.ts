@@ -4,7 +4,15 @@ const submitWord = document.querySelector("#submitWord") as HTMLButtonElement
 const inputWord = document.querySelector("#word") as HTMLInputElement
 
 
-countVowels("JOGADOR");
+/**
+ * countVowels
+ *
+ * Função que retorna a quantidade de vogais contida na palavra inserida.
+ * 
+ * @param verifyWord - a palavra a ser verificada.
+ *  
+ * @returns A quantidade de vogais encontrada na palavra.
+ */
 
 function countVowels(verifyWord: string):number {
     const VOGAIS: string[] = ["A","E","I","O","U"];
@@ -19,6 +27,8 @@ function countVowels(verifyWord: string):number {
     
     return count;
 }
+
+countVowels("JOGADOR");
 
 
 submitWord.addEventListener('click',(event)=>{
