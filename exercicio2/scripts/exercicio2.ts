@@ -1,4 +1,11 @@
-let lista: Array<{id:number,name:string,bio:string}> = [
+interface Pessoa{
+    id:number;
+    name:string;
+    bio:string;
+}
+
+
+let lista: Array<Pessoa> = [
     {   
         id : 1,
         name: "Ada Lovelace", 
