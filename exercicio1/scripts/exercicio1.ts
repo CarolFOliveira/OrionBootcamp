@@ -9,13 +9,11 @@ countVowels("JOGADOR");
 function countVowels(verifyWord: string):number {
     const VOGAIS: string[] = ["A","E","I","O","U"];
     let word: string = verifyWord.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase()
-    let count: number = 0;
     
-    for(let i:number = 0; i<word.length; i++){
-        if(VOGAIS.includes(word[i])){
-            count++;
-        }
-    }
+    let count: number = word.split('').reduce((count, char) => {
+        return VOGAIS.includes(char) ? count + 1 : count;
+    }, 0);
+
     showWord.textContent= verifyWord;
     vowels.textContent=`${count} vogal(is)`;
     
