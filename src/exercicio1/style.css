@@ -6,7 +6,7 @@
     outline: none;
 }
 body{
-    background-color: #edecec;
+    background-color: #592e8b;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     height: 100vh;
@@ -36,7 +36,7 @@ body{
     padding-right: 0.5rem;
 }
 .container .example p, b {
-    color: #ff0000;
+    color: #e5b7aa;
     font-weight: bold;
     
 }
@@ -46,8 +46,9 @@ body{
     border-radius: 1rem;
 }
 .container #form button, #word{
-    background-color: #ffffff;
+    background-color: #592e8bc9;
     padding: 0.3rem;
+    color: #e5b7aa;
     border: 2px solid #656565;
     height: 2rem;
     border-radius: 0.4rem;
