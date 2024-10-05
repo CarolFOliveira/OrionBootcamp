@@ -91,8 +91,8 @@ function update_name(searchId) {
     btn_name.addEventListener('click', (event) => {
         event.preventDefault();
         const newname = input_name.value;
-        const resultName = modify_funcional(searchId, newname, lista);
-        showResult(resultName);
+        lista = modify_funcional(searchId, newname, lista);
+        showResult("Nome alterado");
         showList();
         result_search.removeChild(input_name);
         result_search.removeChild(btn_name);
@@ -182,8 +182,6 @@ function modify_imperativo(id, name) {
 console.log(modify_imperativo(4, "Elon Musk"));
 const modify_funcional = (id, nome, lista) => {
     const item = searchId(id);
-    const index = lista.indexOf(item);
-    lista[index].name = nome;
-    console.log(item);
-    return item ? "Nome alterado" : "Id não encontrado";
+    const novaLista = lista.map(pessoa => pessoa.id === id ? Object.assign(Object.assign({}, pessoa), { name: nome }) : pessoa);
+    return novaLista;
 };
