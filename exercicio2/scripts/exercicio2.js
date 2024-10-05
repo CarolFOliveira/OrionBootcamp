@@ -32,6 +32,21 @@ const btn_remove = document.querySelector("#btn_remove");
 const btn_modify = document.querySelector("#btn_modify");
 const result_search = document.querySelector(".result_search");
 const p = document.createElement("p");
+/**
+ * showList
+ *
+ * Atualiza a lista HTML com os itens do array `lista`.
+ *
+ * Cada item é representado como um elemento `<li>` com a classe `list-group-item`.
+ *
+ *@remarks
+ * - A função assume que `lista` é uma variável global.
+ *
+ *  - A função não recebe parâmetros.
+ *
+ * - Cada item em `lista` deve ter as propriedades `id`, `name` e `bio`.
+ *
+ */
 function showList() {
     list.innerHTML = '';
     lista.forEach((item) => {
@@ -43,7 +58,17 @@ function showList() {
     });
 }
 showList();
+/**
+ * searchId
+ *
+ * Esta função percorre o array `lista` e retorna o primeiro objeto que possui o `id` correspondente
+ *
+ * @param id - O ID a ser procurado
+ *
+ * @returns O objeto da pessoa correspondente ou `undefined` se não for encontrado.
+ */
 function searchId(id) {
+    console.log(lista.find((pessoa) => pessoa.id === id));
     return lista.find((pessoa) => pessoa.id === id);
 }
 function getId() {
@@ -181,7 +206,6 @@ function modify_imperativo(id, name) {
 }
 console.log(modify_imperativo(4, "Elon Musk"));
 const modify_funcional = (id, nome, lista) => {
-    const item = searchId(id);
     const novaLista = lista.map(pessoa => pessoa.id === id ? Object.assign(Object.assign({}, pessoa), { name: nome }) : pessoa);
     return novaLista;
 };

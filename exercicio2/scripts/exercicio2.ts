@@ -41,6 +41,23 @@ const result_search = document.querySelector(".result_search") as HTMLDivElement
 const p = document.createElement("p") as HTMLElement
 
 
+/**
+ * showList
+ *
+ * Atualiza a lista HTML com os itens do array `lista`.
+ * 
+ * Cada item é representado como um elemento `<li>` com a classe `list-group-item`.
+ * 
+ *@remarks
+ * - A função assume que `lista` é uma variável global.
+ * 
+ *  - A função não recebe parâmetros.
+ * 
+ * - Cada item em `lista` deve ter as propriedades `id`, `name` e `bio`.
+ * 
+ */
+
+
 
 function showList() {
     list.innerHTML = '';
@@ -55,15 +72,45 @@ function showList() {
 }
 showList();
 
+
+/**
+ * searchId
+ *
+ * Esta função percorre o array `lista` e retorna o primeiro objeto que possui o `id` correspondente
+ * 
+ * @param id - O ID a ser procurado
+ *
+ * @returns O objeto da pessoa correspondente ou `undefined` se não for encontrado.
+ */
+
 function searchId(id: number) {
     return lista.find((pessoa) => pessoa.id === id)
    }
+
+/**
+ * getId
+ * 
+ * Obtém o ID do campo de entrada e o converte para um número.
+ * 
+ * @returns O ID convertido como um número.
+ */
 
 function getId():number{
     const id:string = input_search.value;
     const searchId: number = parseInt(id);
     return searchId;
 }
+
+/**
+ * showResult
+ *
+ * Esta função define o conteúdo de texto de um elemento de parágrafo `p` com o resultado fornecido
+ * e, em seguida, anexa este parágrafo a `div` result_search para ser mostrado na tela.
+ * 
+ * @param result - A string que será exibida.
+ *
+ * 
+ */  
 
 function showResult(result:string){
     p.textContent = result;
@@ -112,6 +159,16 @@ btn_modify.addEventListener('click', (event)=>{
     
 })
 
+
+/**
+ * update_name
+ * 
+ * Esta função obtém o novo nome do campo de entrada `input_name`, atualiza o array `lista` chamando a função  `modify_funcional`, exibe uma mensagem de sucesso, atualiza a lista exibida e remove os elementos de entrada e botão do DOM.
+ * 
+ * @param searchId - O ID da pessoa cujo nome será atualizado.
+ * 
+ */
+
 function update_name(searchId:number){
     btn_name.addEventListener('click',(event)=>{
         event.preventDefault();
@@ -125,6 +182,18 @@ function update_name(searchId:number){
 }
 
 // a) Crie uma função que retorne a bio do id passado
+
+
+/**
+ * showBio_imperativo
+ * 
+ * Função que retorna a bio de uma pessoa, dado o id de busca para a lista de dados.
+ * 
+ * @param id - O ID da pessoa cuja biografia será retornada.
+ * @returns A biografia da pessoa ou uma mensagem indicando que o ID não foi encontrado.
+ * 
+ */
+
 
 function showBio_imperativo(id:number): string{
 	let answer: string = ""
@@ -144,12 +213,36 @@ function showBio_imperativo(id:number): string{
 }
 console.log(showBio_imperativo(3))
 
+
+/**
+ * showBio_funcional
+ * 
+ * Função que retorna a bio de uma pessoa, dado o id de busca para a lista de dados.
+ * 
+ * Esta função utiliza a função `searchId` para encontrar a pessoa com o ID fornecido
+ * 
+ * @param id - O ID da pessoa cuja biografia será retornada.
+ * @returns A biografia da pessoa ou uma mensagem indicando que o ID não foi encontrado.
+ * 
+ */
 const showBio_funcional = (id:number):string => {
     const item: any = searchId(id)
     return item ? item.bio : "Id não encontrado";
 };
 
+
+
 // b) Crie uma função que retorne o name do id passado
+
+/**
+ * showName_imperativo
+ * 
+ * Função que retorna o nome de uma pessoa, dado o id de busca para a lista de dados.
+ * 
+ * @param id - O ID da pessoa cujo nome será retornada.
+ * @returns O nome da pessoa ou uma mensagem indicando que o ID não foi encontrado.
+ * 
+ */
 
 function showName_imperativo(id:number): string{
 	let answer: string = ""
@@ -169,6 +262,19 @@ function showName_imperativo(id:number): string{
 }
 console.log(showName_imperativo(3))
 
+
+/**
+ * showName_funcional
+ * 
+ * Função que retorna o nome de uma pessoa, dado o id de busca para a lista de dados.
+ * 
+ * Esta função utiliza a função `searchId` para encontrar a pessoa com o ID fornecido
+ * 
+ * @param id - O ID da pessoa cujo nome será retornado.
+ * @returns O nome da pessoa ou uma mensagem indicando que o ID não foi encontrado.
+ * 
+ */
+
 const showName_funcional = (id:number):string  => {
     const item : any = searchId(id)
     return item ? item.name : "Id não encontrado";
@@ -177,6 +283,19 @@ const showName_funcional = (id:number):string  => {
 
 
 // c) Crie uma função que apague um item da lista a partir de um id passado
+
+
+/**
+ * removeItem_imperativo
+ * 
+ * Função que remove um item da lista com base no ID fornecido.
+ * 
+ * 
+ * @param id - O ID do item a ser removido
+ * @returns Retorna uma mensagem indicando se o item foi removido ou se o ID não foi encontrado
+ * 
+ */
+
 
 function removeItem_imperativo(id:number):string{
 	let answer:string = ""
@@ -197,6 +316,21 @@ function removeItem_imperativo(id:number):string{
 }
 console.log(removeItem_imperativo(6))
 
+/**
+ * removeItem_funcional
+ * 
+ * Remove um item da lista com base no ID fornecido.
+ * 
+ * Esta função utiliza a função `searchId` para encontrar o item com o ID fornecido e remove esse item da lista.
+ * Se o item for encontrado e removido, retorna uma mensagem indicando que o item foi removido.
+ * Se o ID não for encontrado, retorna uma mensagem indicando que o ID não foi encontrado.
+ * 
+ * @param id - O ID do item a ser removido.
+ * @param lista - O array de objetos `Pessoa` do qual o item será removido.
+ * @returns Uma mensagem indicando o resultado da operação.
+ * 
+ * */
+
 const removeItem_funcional = (id:number, lista:Array<Pessoa>):string => {
     const item : any = searchId(id);
     const index : any = lista.indexOf(item)
@@ -210,6 +344,18 @@ const removeItem_funcional = (id:number, lista:Array<Pessoa>):string => {
 
 
 // d) Crie uma função que altere a bio ou o name a partir de um id passado
+
+
+/**
+ * modify_imperativo
+ * 
+ * Função que modifica o nome de um item da lista com base no ID fornecido.
+ * 
+ * 
+ * @param id - O ID do item a ser modificado
+ * @returns Retorna uma mensagem indicando se o item foi alterado ou se o ID não foi encontrado
+ * 
+ */
 
 function modify_imperativo(id:number, name:string):string{
     let answer:string = ""
@@ -231,8 +377,21 @@ function modify_imperativo(id:number, name:string):string{
 console.log(modify_imperativo(4,"Elon Musk"))
 
 
+/**
+ * modify_funcional
+ * 
+ * Esta função cria uma nova lista onde o nome do item cujo ID corresponde ao fornecido é atualizado.
+ * Se o ID não for encontrado, a lista original é retornada sem modificações.
+ * 
+ * 
+ * @param id - O ID do item a ser modificado.
+ * @param nome - O novo nome a ser atribuído ao item.
+ * @param lista - O array de objetos `Pessoa` no qual o item será modificado.
+ * @returns Uma nova lista com o item modificado.
+ * 
+ */
+
 const modify_funcional = (id:number,nome:string, lista:Array<Pessoa>):Array<Pessoa> => {
-    const item: any= searchId(id);
     const novaLista = lista.map(pessoa => 
             pessoa.id === id ? { ...pessoa, name: nome } : pessoa
         );
