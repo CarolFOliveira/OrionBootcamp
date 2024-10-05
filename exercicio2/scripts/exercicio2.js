@@ -72,13 +72,18 @@ btn_modify.addEventListener('click', (event) => {
     event.preventDefault();
     const id = input_search.value;
     const searchId = parseInt(id);
-    input_name.placeholder = "Insira o novo nome";
-    input_name.id = "input_name";
-    result_search.appendChild(input_name);
-    btn_name.id = "btn_name";
-    btn_name.textContent = "Atualizar";
-    result_search.appendChild(btn_name);
-    update_name(searchId);
+    if (lista.find(item => item.id === searchId)) {
+        input_name.placeholder = "Insira o novo nome";
+        input_name.id = "input_name";
+        result_search.appendChild(input_name);
+        btn_name.id = "btn_name";
+        btn_name.textContent = "Atualizar";
+        result_search.appendChild(btn_name);
+        update_name(searchId);
+    }
+    else {
+        p.textContent = "Id não encontrado";
+    }
 });
 function update_name(searchId) {
     btn_name.addEventListener('click', (event) => {
@@ -150,8 +155,9 @@ console.log(removeItem_imperativo(6));
 const removeItem_funcional = (id, lista) => {
     const item = lista.find(item => item.id === id);
     const index = lista.indexOf(item);
-    lista.splice(index, 1);
-    console.log(lista);
+    if (index !== -1) {
+        lista.splice(index, 1);
+    }
     return item ? "Item removido" : "Id não encontrado";
 };
 // d) Crie uma função que altere a bio ou o name a partir de um id passado

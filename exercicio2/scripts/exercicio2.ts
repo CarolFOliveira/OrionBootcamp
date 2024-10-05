@@ -49,8 +49,8 @@ function showList() {
         item_list.appendChild(text_list)
         item_list.classList.add("list-group-item");
         list.appendChild(item_list);
-        
         });
+   
 }
 showList();
 
@@ -90,13 +90,18 @@ btn_modify.addEventListener('click', (event)=>{
     event.preventDefault();
     const id:string = input_search.value;
     const searchId: number = parseInt(id)
-    input_name.placeholder = "Insira o novo nome";
-    input_name.id = "input_name"
-    result_search.appendChild(input_name);
-    btn_name.id = "btn_name"
-    btn_name.textContent = "Atualizar"
-    result_search.appendChild(btn_name);
-    update_name(searchId)
+    if(lista.find(item => item.id === searchId)){
+        input_name.placeholder = "Insira o novo nome";
+        input_name.id = "input_name"
+        result_search.appendChild(input_name);
+        btn_name.id = "btn_name"
+        btn_name.textContent = "Atualizar"
+        result_search.appendChild(btn_name);
+        update_name(searchId)
+    } else{
+        p.textContent = "Id não encontrado"
+    }
+    
     
     
 })
@@ -185,13 +190,16 @@ function removeItem_imperativo(id:number):string{
 }
 console.log(removeItem_imperativo(6))
 
-const removeItem_funcional = (id:number, lista:Array<{id:number,name:string,bio:string}>):string => {
+const removeItem_funcional = (id:number, lista:Array<Pessoa>):string => {
     const item : any = lista.find(item => item.id === id);
     const index : any = lista.indexOf(item)
-    lista.splice(index,1)
-    console.log(lista)
+    if(index !== -1){
+        lista.splice(index,1)
+    }
+    
     return item ? "Item removido" : "Id não encontrado";
 };
+
 
 
 // d) Crie uma função que altere a bio ou o name a partir de um id passado
