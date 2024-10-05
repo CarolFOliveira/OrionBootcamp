@@ -43,43 +43,45 @@ function showList() {
     });
 }
 showList();
-btn_searchBio.addEventListener('click', (event) => {
-    event.preventDefault();
+function searchId(id) {
+    return lista.find((pessoa) => pessoa.id === id);
+}
+function getId() {
     const id = input_search.value;
     const searchId = parseInt(id);
-    const result_bio = showBio_funcional(searchId, lista);
-    p.textContent = result_bio;
+    return searchId;
+}
+function showResult(result) {
+    p.textContent = result;
     result_search.appendChild(p);
+}
+btn_searchBio.addEventListener('click', (event) => {
+    event.preventDefault();
+    const resultBio = showBio_funcional(getId());
+    showResult(resultBio);
 });
 btn_searchName.addEventListener('click', (event) => {
     event.preventDefault();
-    const id = input_search.value;
-    const searchId = parseInt(id);
-    const result_name = showName_funcional(searchId, lista);
-    p.textContent = result_name;
-    result_search.appendChild(p);
+    const resultName = showName_funcional(getId());
+    showResult(resultName);
 });
 btn_remove.addEventListener('click', (event) => {
     event.preventDefault();
-    const id = input_search.value;
-    const searchId = parseInt(id);
-    const result_name = removeItem_funcional(searchId, lista);
-    p.textContent = result_name;
-    result_search.appendChild(p);
+    const result = removeItem_funcional(getId(), lista);
+    showResult(result);
     showList();
 });
 btn_modify.addEventListener('click', (event) => {
     event.preventDefault();
-    const id = input_search.value;
-    const searchId = parseInt(id);
-    if (lista.find(item => item.id === searchId)) {
+    const id = getId();
+    if (searchId(id)) {
         input_name.placeholder = "Insira o novo nome";
         input_name.id = "input_name";
         result_search.appendChild(input_name);
         btn_name.id = "btn_name";
         btn_name.textContent = "Atualizar";
         result_search.appendChild(btn_name);
-        update_name(searchId);
+        update_name(id);
     }
     else {
         p.textContent = "Id não encontrado";
@@ -89,10 +91,11 @@ function update_name(searchId) {
     btn_name.addEventListener('click', (event) => {
         event.preventDefault();
         const newname = input_name.value;
-        const result_name = modify_funcional(searchId, newname, lista);
-        p.textContent = result_name;
-        result_search.appendChild(p);
+        const resultName = modify_funcional(searchId, newname, lista);
+        showResult(resultName);
         showList();
+        result_search.removeChild(input_name);
+        result_search.removeChild(btn_name);
     });
 }
 // a) Crie uma função que retorne a bio do id passado
@@ -111,8 +114,8 @@ function showBio_imperativo(id) {
     return answer;
 }
 console.log(showBio_imperativo(3));
-const showBio_funcional = (id, lista) => {
-    const item = lista.find(item => item.id === id);
+const showBio_funcional = (id) => {
+    const item = searchId(id);
     return item ? item.bio : "Id não encontrado";
 };
 // b) Crie uma função que retorne o name do id passado
@@ -131,8 +134,8 @@ function showName_imperativo(id) {
     return answer;
 }
 console.log(showName_imperativo(3));
-const showName_funcional = (id, lista) => {
-    const item = lista.find(item => item.id === id);
+const showName_funcional = (id) => {
+    const item = searchId(id);
     return item ? item.name : "Id não encontrado";
 };
 // c) Crie uma função que apague um item da lista a partir de um id passado
@@ -153,7 +156,7 @@ function removeItem_imperativo(id) {
 }
 console.log(removeItem_imperativo(6));
 const removeItem_funcional = (id, lista) => {
-    const item = lista.find(item => item.id === id);
+    const item = searchId(id);
     const index = lista.indexOf(item);
     if (index !== -1) {
         lista.splice(index, 1);
@@ -178,7 +181,7 @@ function modify_imperativo(id, name) {
 }
 console.log(modify_imperativo(4, "Elon Musk"));
 const modify_funcional = (id, nome, lista) => {
-    const item = lista.find(item => item.id === id);
+    const item = searchId(id);
     const index = lista.indexOf(item);
     lista[index].name = nome;
     console.log(item);

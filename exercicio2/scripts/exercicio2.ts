@@ -29,7 +29,6 @@ let lista: Array<Pessoa> = [
     ];
 
 const list = document.querySelector("#list") as HTMLUListElement
-
 const input_search = document.querySelector("#input_search") as HTMLInputElement;
 const input_name = document.createElement("input") as HTMLInputElement;
 const btn_showList = document.querySelector("#btn_showList") as HTMLButtonElement;
@@ -40,6 +39,8 @@ const btn_remove = document.querySelector("#btn_remove") as HTMLButtonElement;
 const btn_modify = document.querySelector("#btn_modify") as HTMLButtonElement;
 const result_search = document.querySelector(".result_search") as HTMLDivElement;
 const p = document.createElement("p") as HTMLElement
+
+
 
 function showList() {
     list.innerHTML = '';
@@ -54,54 +55,59 @@ function showList() {
 }
 showList();
 
+function searchId(id: number) {
+    return lista.find((pessoa) => pessoa.id === id)
+   }
 
+function getId():number{
+    const id:string = input_search.value;
+    const searchId: number = parseInt(id);
+    return searchId;
+}
+
+function showResult(result:string){
+    p.textContent = result;
+    result_search.appendChild(p);
+}
 
 btn_searchBio.addEventListener('click', (event)=>{
     event.preventDefault();
-    const id:string = input_search.value;
-    const searchId: number = parseInt(id)
-    const result_bio: string = showBio_funcional(searchId,lista)
-    p.textContent = result_bio;
-    result_search.appendChild(p);
+    const resultBio: string = showBio_funcional(getId())
+    showResult(resultBio);
     
 })
 
 btn_searchName.addEventListener('click', (event)=>{
     event.preventDefault();
-    const id:string = input_search.value;
-    const searchId: number = parseInt(id)
-    const result_name: string = showName_funcional(searchId,lista)
-    p.textContent = result_name;
-    result_search.appendChild(p);
+    const resultName: string = showName_funcional(getId())
+    showResult(resultName);
     
 })
 
 btn_remove.addEventListener('click', (event)=>{
     event.preventDefault();
-    const id:string = input_search.value;
-    const searchId: number = parseInt(id)
-    const result_name: string = removeItem_funcional(searchId,lista)
-    p.textContent = result_name;
-    result_search.appendChild(p);
+    const result: string = removeItem_funcional(getId(),lista)
+    showResult(result);
     showList();
     
 })
+
 btn_modify.addEventListener('click', (event)=>{
     event.preventDefault();
-    const id:string = input_search.value;
-    const searchId: number = parseInt(id)
-    if(lista.find(item => item.id === searchId)){
+    const id:number = getId()
+    if(searchId(id)){
         input_name.placeholder = "Insira o novo nome";
         input_name.id = "input_name"
         result_search.appendChild(input_name);
         btn_name.id = "btn_name"
         btn_name.textContent = "Atualizar"
         result_search.appendChild(btn_name);
-        update_name(searchId)
+        update_name(id)
+        
     } else{
         p.textContent = "Id não encontrado"
     }
-    
+        
     
     
 })
@@ -110,10 +116,11 @@ function update_name(searchId:number){
     btn_name.addEventListener('click',(event)=>{
         event.preventDefault();
         const newname: string = input_name.value;
-        const result_name: string = modify_funcional(searchId,newname,lista)
-        p.textContent = result_name;
-        result_search.appendChild(p);
+        const resultName: string = modify_funcional(searchId,newname,lista)
+        showResult(resultName);
         showList();
+        result_search.removeChild(input_name);
+        result_search.removeChild(btn_name);
     })
 }
 
@@ -137,8 +144,8 @@ function showBio_imperativo(id:number): string{
 }
 console.log(showBio_imperativo(3))
 
-const showBio_funcional = (id:number, lista:Array<{id:number,name:string,bio:string}>):string => {
-    const item : any = lista.find(item => item.id === id);
+const showBio_funcional = (id:number):string => {
+    const item: any = searchId(id)
     return item ? item.bio : "Id não encontrado";
 };
 
@@ -162,8 +169,8 @@ function showName_imperativo(id:number): string{
 }
 console.log(showName_imperativo(3))
 
-const showName_funcional = (id:number, lista:Array<{id:number,name:string,bio:string}>):string  => {
-    const item : any = lista.find(item => item.id === id);
+const showName_funcional = (id:number):string  => {
+    const item : any = searchId(id)
     return item ? item.name : "Id não encontrado";
 };
 
@@ -191,7 +198,7 @@ function removeItem_imperativo(id:number):string{
 console.log(removeItem_imperativo(6))
 
 const removeItem_funcional = (id:number, lista:Array<Pessoa>):string => {
-    const item : any = lista.find(item => item.id === id);
+    const item : any = searchId(id);
     const index : any = lista.indexOf(item)
     if(index !== -1){
         lista.splice(index,1)
@@ -224,8 +231,8 @@ function modify_imperativo(id:number, name:string):string{
 console.log(modify_imperativo(4,"Elon Musk"))
 
 
-const modify_funcional = (id:number,nome:string, lista:Array<{id:number,name:string,bio:string}>):string => {
-    const item: any= lista.find(item => item.id === id);
+const modify_funcional = (id:number,nome:string, lista:Array<Pessoa>):string => {
+    const item: any= searchId(id);
     const index : any = lista.indexOf(item);
     lista[index].name = nome;
     console.log(item)
